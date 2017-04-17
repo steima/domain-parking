@@ -73,7 +73,7 @@ $server = $_SERVER ['HTTP_HOST'];
 		<div class="row">
 			<div class="col-md-6">
 				<h1>This is what the world says about <?=$server?></h1>
-				Test
+				TBD
 			</div>
 			<div class="col-md-6">
 				<a class="twitter-timeline" href="https://twitter.com/hashtag/wahl2017"
