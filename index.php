@@ -60,7 +60,7 @@ $server = $_SERVER ['HTTP_HOST'];
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>The domain <?=$server;?> is parked!</h1>
+			<h1><?=$server;?> is parked!</h1>
 			<p>We are currently working on other projects and thus have parked this domain.
 			If you are intersted in hosting your content here please contact us!</p>
 			<p>
