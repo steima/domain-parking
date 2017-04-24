@@ -1,5 +1,78 @@
 <?php
-$server = $_SERVER ['HTTP_HOST'];
+	/**
+	 * Determines the base domain name that was hit by the request
+	 */
+	$domain = $_SERVER ['HTTP_HOST'];
+	$base_domain = null;
+	if(strpos($domain, 'www.') === 0) {
+		$base_domain = substr($domain, 4);
+	}else{
+		$base_domain = $domain;
+	}
+	
+	/**
+	 * Parses configuration files such that display keys are available
+	 */
+	function load_configuration() {
+		global $domain;
+		global $base_domain;
+		$defaults_content = file_get_contents('defaults.json');
+		$config = json_decode($defaults_content, true);
+		
+		$filename = $base_domain . '.json';
+		while(file_exists($filename)) {
+			$domain_content = file_get_contents($filename);
+			$domain_config = json_decode($domain_content, true);
+			
+			if(isset($domain_config['forward'])) {
+				$filename = $domain_config['forward'] . '.json';
+			}else{
+				$config = array_merge($config, $domain_config);
+				$filename = null;
+			}
+		}
+		
+		if(!isset($config['domain'])) {
+			$config['domain'] = $domain;
+		}
+		if(!isset($config['base_domain'])) {
+			$config['base_domain'] = $base_domain;
+		}
+		
+		return $config;
+	}
+	
+	/**
+	 * Lookup a single key from configuration, if none is specified the loaded
+	 * global configuration is used
+	 * 
+	 * @param unknown $key
+	 * @param unknown $config_array
+	 */
+	function lookup($key, &$config_array = null) {
+		global $config;
+		if($config_array == null) {
+			$config_array = $config;
+		}
+		return $config_array[$key];
+	}
+	
+	/**
+	 * Perform curly braces string replacements in the provided configuration
+	 * 
+	 * @param unknown $config_array
+	 */
+	function run_replacements(&$config_array) {
+		foreach ($config_array as $key => $value) {
+			$needle = '{' . $key . '}';
+			foreach ($config_array as $rkey => $rvalue) {
+				$config_array[$rkey] = str_replace($needle, $value, $rvalue);
+			}
+		}
+	}
+	
+	$config = load_configuration();
+	run_replacements($config);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +81,7 @@ $server = $_SERVER ['HTTP_HOST'];
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Landing on <?=$server?></title>
+<title><?=$config['title']?></title>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -47,7 +120,7 @@ $server = $_SERVER ['HTTP_HOST'];
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><?=$server;?></a>
+				<a class="navbar-brand" href="#"><?=$domain;?></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right">
@@ -60,7 +133,7 @@ $server = $_SERVER ['HTTP_HOST'];
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1><?=$server;?> is parked!</h1>
+			<h1><?=$config['heading']?></h1>
 			<p>We are currently working on other projects and thus have parked this domain.
 			If you are intersted in hosting your content here please contact us!</p>
 			<p>
@@ -72,8 +145,8 @@ $server = $_SERVER ['HTTP_HOST'];
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
-				<h1>This is what the world says about <?=$server?></h1>
-				TBD
+				<h1>This is what the world says about <?=$domain?></h1>
+				<?php 	print_r($config); ?>
 			</div>
 			<div class="col-md-6">
 				<a class="twitter-timeline" href="https://twitter.com/hashtag/wahl2017"
