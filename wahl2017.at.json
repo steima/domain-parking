@@ -1,5 +1,20 @@
 {
 	"title": "Nationalratswahlen Österreich 2017 - {domain}",
-	"heading": "Nationalratswahlen Österreich 2017 - {domain}",
-	"googleanalytics": "UA-97887913-1"
+	"heading": "Nationalratswahlen Österreich 2017?",
+	"headercta": "Ihre Inhalte auf {domain}!",
+	"teaser": "In der österreichischen Innenpolitik keimt seit Herbst 2016 immer wieder das Gerücht auf, es könnte im Jahr 2017 zu vorgezogenen Nationalratswahlen kommen. Diese Seite versteht sich als Informationssammlung zu diesem Thema. Auch ihre Inhalte können auf dieser Seite aufscheinen!",
+	"teasercta": "Kontaktieren Sie uns JETZT!",
+	
+	"mailtocontent": "mailto:{email}?subject=Inhalte auf {domain} hosten / Domain kaufen",
+	"contactformheading": "Gerne können ihre Inhalte auf {domain} gehostet werden!",
+	"contactforminfo": "Senden sie einfach eine E-Mail an <a href=\"{mailtocontent}\">{email}</a> und wir helfen ihnen gerne!",
+	
+	"googleanalytics": "UA-97887913-1",
+	
+	"googleadwordsclient": "ca-pub-4893300109056855",
+	"googleadwordsslot": "9079747325",
+	
+	"twitterwidgethref": "https://twitter.com/hashtag/wahl2017",
+	"twitterwidgetid": "853863854748684288",
+	"twitterwidgettitle": "Wahl 2017 Tweets"
 }

@@ -1,5 +1,14 @@
 {
 	"title": "Landing on {domain}",
 	"header": "{domain}",
-	"heading": "{domain} is parked!"
+	"headercta": "Buy Domain",
+	"heading": "{domain} is parked!",
+	"teaser": "We are currently working on other projects and thus have parked this domain. If you are intersted in hosting your content here please contact us!",
+	"teasercta": "Contact us now!",
+	"teaserctaclass": "glyphicon glyphicon-envelope",
+	"contentfragment": "{base_domain}.html",
+	"email": "office@steinbauer.org",
+	"mailtocontent": "mailto:{email}?subject=Domain offer for {domain}",
+	"contactformheading": "We are happy to host your content",
+	"contactforminfo": "Please just send an e-Mail to <a href=\"{mailtocontent}\">{email}</a>"
 }

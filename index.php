@@ -25,7 +25,8 @@
 			$domain_config = json_decode($domain_content, true);
 			
 			if(isset($domain_config['forward'])) {
-				$filename = $domain_config['forward'] . '.json';
+				$base_domain = $domain_config['forward'];
+				$filename = $base_domain . '.json';
 			}else{
 				$config = array_merge($config, $domain_config);
 				$filename = null;
@@ -71,8 +72,27 @@
 		}
 	}
 	
+	/**
+	 * Try to load an HTML fragment for the content div
+	 * 
+	 * @param unknown $config_array
+	 */
+	function load_content_fragment(&$config_array = null) {
+		global $config;
+		if($config_array == null) {
+			$config_array = $config;
+		}
+		if(isset($config['contentfragment']) && file_exists($config['contentfragment'])) {
+			$content = file_get_contents($config['contentfragment']);
+			return $content;
+		}
+		return null;
+	}
+	
 	$config = load_configuration();
 	run_replacements($config);
+	$content = load_content_fragment($config);
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,11 +140,11 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><?=$domain;?></a>
+				<a class="navbar-brand" href="<?=$config['mailtocontent']?>"><?=$config['header']?></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right">
-					<button type="submit" class="btn btn-success">Buy Domain</button>
+					<a class="btn btn-success" href="<?=$config['mailtocontent']?>"><?=$config['headercta']?></a>
 				</form>
 			</div>
 			<!--/.navbar-collapse -->
@@ -134,28 +154,53 @@
 	<div class="jumbotron">
 		<div class="container">
 			<h1><?=$config['heading']?></h1>
-			<p>We are currently working on other projects and thus have parked this domain.
-			If you are intersted in hosting your content here please contact us!</p>
+			<p><?=$config['teaser']?></p>
 			<p>
-				<a class="btn btn-primary btn-lg" href="#" role="button"><span class="glyphicon glyphicon-envelope" style="padding-right:10px;"></span>Contact us now!</a>
+				<a id="cta" class="btn btn-primary btn-lg" href="<?=$config['mailtocontent']?>" role="button"><span class="<?=$config['teaserctaclass']?>" style="padding-right:10px;"></span><?=$config['teasercta']?></a>
 			</p>
 		</div>
 	</div>
 	
 	<div class="container">
 		<div class="row">
+			<?php if($content != null) { ?>
 			<div class="col-md-6">
-				<h1>This is what the world says about <?=$domain?></h1>
-				<?php 	print_r($config); ?>
+				<?=$content?>
 			</div>
+			<?php } ?>
+			<?php if(isset($config['twitterwidgethref']) && isset($config['twitterwidgetid'])) {?>
 			<div class="col-md-6">
-				<a class="twitter-timeline" href="https://twitter.com/hashtag/wahl2017"
+				<a class="twitter-timeline" href="<?=$config['twitterwidgethref']?>"
 					chrome="noheader"
-					data-widget-id="853863854748684288">#wahl2017 Tweets</a>
+					data-widget-id="<?=$config['twitterwidgetid']?>"><?=$config['twitterwidgettitle']?></a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 			</div>
+			<?php } ?>
+			<?php if(isset($config['googleadwordsclient']) && isset($config['googleadwordsslot'])) { ?>
+			<div class="col-md-6">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- domain-parking -->
+				<ins class="adsbygoogle"
+				     style="display:block"
+				     data-ad-client="<?=$config['googleadwordsclient']?>"
+				     data-ad-slot="<?=$config['googleadwordsslot']?>"
+				     data-ad-format="auto"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+			<?php } ?>
 		</div>
-		
+		<?php if(isset($config['contactforminfo'])) { ?>
+		<div class="row">
+			<div class="col-md-12">
+				<?php if(isset($config['contactformheading'])) { ?>
+					<h2><?=$config['contactformheading']?></h2>
+				<?php } ?>
+				<p><?=$config['contactforminfo']?></p>
+			</div>
+		</div>
+		<?php } ?>
 		<hr />
 		<footer>
 			<p>&copy; <?php echo date("Y"); ?> <a href="https://steinbauer.org/about">Matthias Steinbauer</a></p>
@@ -170,7 +215,7 @@
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	
-	  ga('create', 'UA-97887913-1', 'auto');
+	  ga('create', '<?=$config['googleanalytics']?>', 'auto');
 	  ga('send', 'pageview');
 	
 	</script>
