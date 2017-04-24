@@ -162,6 +162,7 @@
 		</footer>
 	</div>
 
+	<?php if(isset($config['googleanalytics'])) { ?>
 	<!-- Google Analytics -->
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -173,5 +174,6 @@
 	  ga('send', 'pageview');
 	
 	</script>
+	<?php } ?>
 </body>
 </html>
