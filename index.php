@@ -165,7 +165,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<script type="text/javascript" src="//cdn.playbuzz.com/widget/feed.js"></script>
-				<div class="pb_feed" data-embed-by="a0fc949e-55c3-40fe-b5b9-428b8d440bec" data-item="ce874d2b-f320-4803-8901-300bc1a6891d" data-recommend="false" data-game-info="false" data-comments="false" data-shares="false" data-version="2"></div>
+				<div class="pb_feed" data-embed-by="a0fc949e-55c3-40fe-b5b9-428b8d440bec" data-item="ce874d2b-f320-4803-8901-300bc1a6891d" data-recommend="false" data-game-info="true" data-comments="false" data-shares="false" data-version="2"></div>
 			</div>
 		</div>
 		<div class="row">
