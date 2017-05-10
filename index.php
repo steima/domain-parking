@@ -163,19 +163,18 @@
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-4">
 				<script type="text/javascript" src="//cdn.playbuzz.com/widget/feed.js"></script>
 				<div class="pb_feed" data-embed-by="a0fc949e-55c3-40fe-b5b9-428b8d440bec" data-item="ce874d2b-f320-4803-8901-300bc1a6891d" data-recommend="false" data-game-info="true" data-comments="false" data-shares="false" data-version="2"></div>
 			</div>
-		</div>
-		<div class="row">
+	
 			<?php if($content != null) { ?>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<?=$content?>
 			</div>
 			<?php } ?>
 			<?php if(isset($config['twitterwidgethref']) && isset($config['twitterwidgetid'])) {?>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<a class="twitter-timeline" href="<?=$config['twitterwidgethref']?>"
 					chrome="noheader"
 					data-widget-id="<?=$config['twitterwidgetid']?>"><?=$config['twitterwidgettitle']?></a>
@@ -183,7 +182,7 @@
 			</div>
 			<?php } ?>
 			<?php if(isset($config['googleadwordsclient']) && isset($config['googleadwordsslot'])) { ?>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- domain-parking -->
 				<ins class="adsbygoogle"
