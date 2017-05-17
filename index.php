@@ -156,7 +156,7 @@
 			<h1><?=$config['heading']?></h1>
 			<p><?=$config['teaser']?></p>
 <!-- Display the countdown timer in an element -->
-<p>Nur noch <strong>><span id="countdown"></span></strong bis zur Wahl!</p>
+<p>Nur noch <strong><span id="countdown"></span></strong> bis zur Wahl!</p>
 
 <script>
 // Set the date we're counting down to
