@@ -10,5 +10,10 @@
 	"email": "office@steinbauer.org",
 	"mailtocontent": "mailto:{email}?subject=Domain offer for {domain}",
 	"contactformheading": "We are happy to host your content",
-	"contactforminfo": "Please just send an e-Mail to <a href=\"{mailtocontent}\">{email}</a>"
+	"contactforminfo": "Please just send an e-Mail to <a href=\"{mailtocontent}\">{email}</a>",
+
+	"googleanalytics": "UA-97887913-1",
+	
+	"googleadwordsclient": "ca-pub-4893300109056855",
+	"googleadwordsslot": "9079747325"
 }
